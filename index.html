@@ -22,7 +22,11 @@
       <div class="hero-inner">
         <p class="eyebrow">GPU Scroll Experience</p>
         <h1>Product motion controlled by scroll.</h1>
-        <p>A polished scroll-linked image sequence built with GSAP, ScrollTrigger, canvas rendering, parallax depth, sticky copy, and interactive cards.</p>
+        <p>This project documents my first hands-on build with scroll-controlled image sequences: generating motion frames with Google Flow, slicing them into assets, and turning them into an interactive GSAP canvas experience.</p>
+        <div class="hero-actions">
+          <a class="button-link" href="https://vpghb.github.io/Personal-profile/">About me</a>
+          <a class="button-link button-link-secondary" href="#process">See the process</a>
+        </div>
       </div>
     </section>
 
@@ -33,30 +37,30 @@
           <img class="parallax-product" id="parallax-product" alt="">
         </div>
         <div class="parallax-copy">
-          <p class="eyebrow">Depth Layer</p>
-          <h2>Hardware motion before the sequence begins.</h2>
-          <p>A subtle parallax pass gives the page a cinematic lead-in, with the background, product frame, and headline drifting at different speeds.</p>
+          <p class="eyebrow">Learning Build</p>
+          <h2>From generated frames to a scrollable web moment.</h2>
+          <p>I used this GPU motion study to learn how frame sequences, pinned scrolling, canvas drawing, and responsive animation work together on a real page.</p>
         </div>
       </div>
     </section>
 
-    <section class="walkthrough-section" id="walkthrough-section" aria-label="Feature walkthrough">
+    <section class="walkthrough-section" id="process" aria-label="Feature walkthrough">
       <div class="walkthrough-grid">
         <div class="walkthrough-copy">
           <article class="walkthrough-step is-active" data-step="01" data-title="Frame Prep">
-            <p class="eyebrow">01 / Preload</p>
-            <h3>Load the frames before the motion starts.</h3>
-            <p>The sequence keeps every JPG ready in memory first, so the canvas can scrub through the transition without waiting on image requests mid-scroll.</p>
+            <p class="eyebrow">01 / Generate</p>
+            <h3>Create the motion source in Google Flow.</h3>
+            <p>I started with AI-generated GPU visuals, used first-and-last frame motion generation, then exported the animation into a frame sequence I could control in the browser.</p>
           </article>
           <article class="walkthrough-step" data-step="02" data-title="Scroll Sync">
-            <p class="eyebrow">02 / Scrub</p>
-            <h3>Map scroll progress directly to the frame index.</h3>
-            <p>ScrollTrigger pins the stage, reads section progress, and updates the canvas frame with smooth scrub timing.</p>
+            <p class="eyebrow">02 / Build</p>
+            <h3>Map scroll progress to image frames.</h3>
+            <p>The page preloads every frame, pins the visual stage with ScrollTrigger, and uses scroll progress to choose the exact canvas frame.</p>
           </article>
           <article class="walkthrough-step" data-step="03" data-title="Responsive Canvas">
-            <p class="eyebrow">03 / Render</p>
-            <h3>Keep the visual centered and sharp at every size.</h3>
-            <p>The canvas redraws on resize with device-pixel-ratio handling while the image uses contain sizing across desktop and mobile.</p>
+            <p class="eyebrow">03 / Refine</p>
+            <h3>Make it feel like a polished interaction.</h3>
+            <p>I added parallax depth, sticky explanation panels, hover states, mobile layout rules, and a full-screen sequence stage so the project feels like a finished product page.</p>
           </article>
         </div>
         <aside class="walkthrough-visual-shell" aria-hidden="true">
@@ -75,9 +79,9 @@
     <section class="product-cards-section" aria-label="Product cards">
       <div class="product-cards-inner">
         <div class="product-cards-heading">
-          <p class="eyebrow">Interactive Cards</p>
-          <h2>Three polished states before the full scroll sequence.</h2>
-          <p>Each card uses a frame from the GPU sequence, then responds with a lift, image scale, shadow, and CTA reveal.</p>
+          <p class="eyebrow">What I Practiced</p>
+          <h2>Small interaction details around the main canvas.</h2>
+          <p>These cards break down the pieces I explored while learning this pattern: frame assets, scroll timing, and responsive canvas rendering.</p>
         </div>
         <div class="product-card-grid">
           <article class="product-card" tabindex="0">
@@ -111,6 +115,16 @@
       </div>
     </section>
 
+
+    <section class="sequence-lead" id="sequence-lead" aria-label="Sequence introduction">
+      <img class="sequence-lead-image" id="sequence-lead-image" alt="">
+      <div class="sequence-lead-overlay"></div>
+      <div class="sequence-lead-copy">
+        <p class="eyebrow">Full Screen Sequence</p>
+        <h2>The frames take over the page.</h2>
+        <p>Scroll once more and the canvas pins full-screen, fading the GPU motion into the main scrubbed animation.</p>
+      </div>
+    </section>
     <section class="sequence-section" id="sequence-section">
       <div class="sequence-pin">
         <canvas id="sequence-canvas" aria-label="Scroll linked GPU image sequence"></canvas>

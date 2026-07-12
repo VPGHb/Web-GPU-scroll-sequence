@@ -164,3 +164,185 @@ canvas { width: 100vw; height: 100vh; display: block; background: #000; }
   .product-card { min-height: 0; }
   .sequence-card { padding: 14px 16px; }
 }
+/* Project polish pass */
+.hero-section {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 12% -12% auto auto;
+  width: min(42vw, 520px);
+  aspect-ratio: 1;
+  z-index: -1;
+  background: radial-gradient(circle, rgba(194,202,187,.14), transparent 68%);
+  filter: blur(12px);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 20px;
+  border: 1px solid rgba(247,248,255,.82);
+  color: #050507;
+  background: var(--text);
+  font-size: .78rem;
+  font-weight: 850;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  transition: transform .25s ease, border-color .25s ease, background .25s ease, color .25s ease;
+}
+
+.button-link:hover,
+.button-link:focus-visible {
+  transform: translateY(-2px);
+}
+
+.button-link-secondary {
+  color: var(--text);
+  background: rgba(255,255,255,.045);
+  border-color: rgba(255,255,255,.18);
+}
+
+.parallax-sticky {
+  justify-items: stretch;
+}
+
+.parallax-product-wrap {
+  right: clamp(-42px, 3vw, 72px);
+  bottom: clamp(72px, 12vh, 132px);
+  width: min(56vw, 720px);
+  opacity: .88;
+}
+
+.parallax-copy {
+  align-content: center;
+  justify-items: start;
+}
+
+.parallax-copy h2 {
+  max-width: min(570px, 48vw);
+}
+
+.parallax-copy p {
+  max-width: min(500px, 46vw);
+}
+
+.sequence-lead {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  background: #000;
+}
+
+.sequence-lead-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .26;
+  transform: scale(1.08);
+  filter: saturate(.9) contrast(1.05);
+  will-change: transform, opacity;
+}
+
+.sequence-lead-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(0,0,0,.12), rgba(0,0,0,.74) 62%, #000 100%),
+    linear-gradient(180deg, #000 0%, transparent 28%, transparent 62%, #000 100%);
+}
+
+.sequence-lead-copy {
+  position: relative;
+  z-index: 2;
+  width: min(1060px, calc(100% - 42px));
+  display: grid;
+  gap: 22px;
+}
+
+.sequence-lead-copy h2 {
+  max-width: 820px;
+}
+
+.sequence-section {
+  min-height: 560vh;
+  background: #000;
+}
+
+.sequence-pin {
+  min-height: 100svh;
+  opacity: .001;
+  will-change: opacity, transform;
+}
+
+.sequence-pin::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, transparent 34%, rgba(0,0,0,.26) 72%, rgba(0,0,0,.62) 100%);
+}
+
+.sequence-ui {
+  z-index: 5;
+}
+
+.sequence-card {
+  opacity: .86;
+}
+
+@media (max-width: 900px) {
+  .parallax-product-wrap {
+    width: min(64vw, 560px);
+    opacity: .52;
+  }
+
+  .parallax-copy h2,
+  .parallax-copy p {
+    max-width: min(620px, 78vw);
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-actions {
+    width: 100%;
+  }
+
+  .button-link {
+    flex: 1 1 180px;
+  }
+
+  .parallax-copy h2,
+  .parallax-copy p {
+    max-width: 100%;
+  }
+
+  .parallax-product-wrap {
+    width: min(94vw, 460px);
+    opacity: .32;
+  }
+
+  .sequence-lead-copy {
+    width: min(100% - 32px, 1060px);
+  }
+}

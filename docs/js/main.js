@@ -15,6 +15,7 @@ const parallaxProduct = document.getElementById("parallax-product");
 const walkthroughFrame = document.getElementById("walkthrough-frame");
 const walkthroughStepLabel = document.getElementById("walkthrough-step-label");
 const walkthroughTitle = document.getElementById("walkthrough-title");
+const sequenceLeadImage = document.getElementById("sequence-lead-image");
 
 const sequenceState = { frame: 0 };
 const images = [];
@@ -42,7 +43,7 @@ function resizeCanvas() {
   renderFrame(currentFrame);
 }
 
-function drawContain(image) {
+function drawCover(image) {
   if (!image || !image.complete) return;
   const imageRatio = image.naturalWidth / image.naturalHeight;
   const canvasRatio = canvasWidth / canvasHeight;
@@ -50,9 +51,9 @@ function drawContain(image) {
   let drawHeight = canvasHeight;
 
   if (imageRatio > canvasRatio) {
-    drawHeight = canvasWidth / imageRatio;
-  } else {
     drawWidth = canvasHeight * imageRatio;
+  } else {
+    drawHeight = canvasWidth / imageRatio;
   }
 
   const x = (canvasWidth - drawWidth) / 2;
@@ -64,7 +65,7 @@ function drawContain(image) {
 
 function renderFrame(index) {
   currentFrame = clamp(Math.round(index), 0, images.length - 1);
-  drawContain(images[currentFrame]);
+  drawCover(images[currentFrame]);
   if (frameLabel) frameLabel.textContent = `Frame ${String(currentFrame + 1).padStart(3, "0")}`;
 }
 
@@ -187,6 +188,42 @@ function initProductCards() {
   });
 }
 
+
+function initSequenceLead() {
+  const lead = document.getElementById("sequence-lead");
+  if (!lead) return;
+  if (sequenceLeadImage) sequenceLeadImage.src = imageAt(0);
+
+  gsap.fromTo(sequenceLeadImage,
+    { autoAlpha: 0.18, scale: 1.12 },
+    {
+      autoAlpha: 0.42,
+      scale: 1.02,
+      ease: "none",
+      scrollTrigger: {
+        trigger: lead,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 0.8
+      }
+    }
+  );
+
+  gsap.fromTo(".sequence-lead-copy",
+    { y: 30, autoAlpha: 0 },
+    {
+      y: 0,
+      autoAlpha: 1,
+      duration: 0.9,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: lead,
+        start: "top 62%",
+        toggleActions: "play none none reverse"
+      }
+    }
+  );
+}
 function initParallax() {
   const section = document.getElementById("parallax-section");
   if (!section) return;
@@ -223,6 +260,21 @@ async function initSequence() {
   initProductCards();
   resizeCanvas();
   loader.classList.add("is-hidden");
+
+  gsap.fromTo(".sequence-pin",
+    { autoAlpha: 0.001, scale: 1.015 },
+    {
+      autoAlpha: 1,
+      scale: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#sequence-section",
+        start: "top 82%",
+        end: "top top",
+        scrub: 0.7
+      }
+    }
+  );
 
   gsap.to(sequenceState, {
     frame: images.length - 1,
