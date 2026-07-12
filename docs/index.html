@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A GSAP ScrollTrigger GPU product scroll sequence with parallax, sticky walkthrough, and interactive cards.">
+  <title>GPU Scroll Sequence</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="loader" id="loader">
+    <div class="loader-panel">
+      <strong id="loader-label">Loading frames 0%</strong>
+      <div class="loader-line" aria-hidden="true"><span id="loader-bar"></span></div>
+      <p class="fallback-message">The image sequence is taking longer than expected. The page will continue once enough frames are ready.</p>
+    </div>
+  </div>
+
+  <main class="page-shell">
+    <section class="hero-section" id="home">
+      <div class="hero-inner">
+        <p class="eyebrow">GPU Scroll Experience</p>
+        <h1>Product motion controlled by scroll.</h1>
+        <p>A polished scroll-linked image sequence built with GSAP, ScrollTrigger, canvas rendering, parallax depth, sticky copy, and interactive cards.</p>
+      </div>
+    </section>
+
+    <section class="parallax-section" id="parallax-section" aria-label="GPU parallax introduction">
+      <div class="parallax-sticky">
+        <div class="parallax-bg" aria-hidden="true"></div>
+        <div class="parallax-product-wrap" aria-hidden="true">
+          <img class="parallax-product" id="parallax-product" alt="">
+        </div>
+        <div class="parallax-copy">
+          <p class="eyebrow">Depth Layer</p>
+          <h2>Hardware motion before the sequence begins.</h2>
+          <p>A subtle parallax pass gives the page a cinematic lead-in, with the background, product frame, and headline drifting at different speeds.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="walkthrough-section" id="walkthrough-section" aria-label="Feature walkthrough">
+      <div class="walkthrough-grid">
+        <div class="walkthrough-copy">
+          <article class="walkthrough-step is-active" data-step="01" data-title="Frame Prep">
+            <p class="eyebrow">01 / Preload</p>
+            <h3>Load the frames before the motion starts.</h3>
+            <p>The sequence keeps every JPG ready in memory first, so the canvas can scrub through the transition without waiting on image requests mid-scroll.</p>
+          </article>
+          <article class="walkthrough-step" data-step="02" data-title="Scroll Sync">
+            <p class="eyebrow">02 / Scrub</p>
+            <h3>Map scroll progress directly to the frame index.</h3>
+            <p>ScrollTrigger pins the stage, reads section progress, and updates the canvas frame with smooth scrub timing.</p>
+          </article>
+          <article class="walkthrough-step" data-step="03" data-title="Responsive Canvas">
+            <p class="eyebrow">03 / Render</p>
+            <h3>Keep the visual centered and sharp at every size.</h3>
+            <p>The canvas redraws on resize with device-pixel-ratio handling while the image uses contain sizing across desktop and mobile.</p>
+          </article>
+        </div>
+        <aside class="walkthrough-visual-shell" aria-hidden="true">
+          <div class="walkthrough-visual">
+            <span class="walkthrough-orbit"></span>
+            <img class="walkthrough-frame" id="walkthrough-frame" alt="">
+            <div class="walkthrough-meta">
+              <span id="walkthrough-step-label">01</span>
+              <strong id="walkthrough-title">Frame Prep</strong>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="product-cards-section" aria-label="Product cards">
+      <div class="product-cards-inner">
+        <div class="product-cards-heading">
+          <p class="eyebrow">Interactive Cards</p>
+          <h2>Three polished states before the full scroll sequence.</h2>
+          <p>Each card uses a frame from the GPU sequence, then responds with a lift, image scale, shadow, and CTA reveal.</p>
+        </div>
+        <div class="product-card-grid">
+          <article class="product-card" tabindex="0">
+            <div class="product-card-media"><img class="product-card-image" data-frame-index="8" alt=""></div>
+            <div class="product-card-body">
+              <p class="eyebrow">Frame Set</p>
+              <h3>Prepared stills</h3>
+              <p>Image frames are loaded as individual assets so the scroll animation stays easy to maintain.</p>
+              <a class="product-card-cta" href="#sequence-section">View sequence</a>
+            </div>
+          </article>
+          <article class="product-card" tabindex="0">
+            <div class="product-card-media"><img class="product-card-image" data-frame-index="24" alt=""></div>
+            <div class="product-card-body">
+              <p class="eyebrow">Scroll Engine</p>
+              <h3>GSAP timing</h3>
+              <p>ScrollTrigger controls the frame index while GSAP keeps the interactions smooth and responsive.</p>
+              <a class="product-card-cta" href="#sequence-section">Scrub frames</a>
+            </div>
+          </article>
+          <article class="product-card" tabindex="0">
+            <div class="product-card-media"><img class="product-card-image" data-frame-index="42" alt=""></div>
+            <div class="product-card-body">
+              <p class="eyebrow">Canvas Render</p>
+              <h3>Sharp playback</h3>
+              <p>The canvas redraws around the viewport and keeps the product image centered across screen sizes.</p>
+              <a class="product-card-cta" href="#sequence-section">Open canvas</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sequence-section" id="sequence-section">
+      <div class="sequence-pin">
+        <canvas id="sequence-canvas" aria-label="Scroll linked GPU image sequence"></canvas>
+        <div class="sequence-ui">
+          <div class="sequence-card">
+            <strong id="frame-label">Frame 001</strong>
+            <span>Canvas image sequence controlled by GSAP ScrollTrigger.</span>
+          </div>
+        </div>
+        <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progress-bar"></div></div>
+      </div>
+    </section>
+
+    <section class="outro-section">
+      <p class="eyebrow">Created by Vraj Patel</p>
+      <h2>Built from an AI-generated GPU motion study.</h2>
+      <p>I created this scroll experience using frames generated with Google Flow, then rebuilt the animation as a clean web project with GSAP, ScrollTrigger, canvas rendering, and responsive interaction details.</p>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

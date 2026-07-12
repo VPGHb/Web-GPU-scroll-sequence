@@ -1,7 +1,7 @@
 # GPU Scroll Sequence
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-c2cabb?style=for-the-badge&logo=githubpages&logoColor=111111)](https://vpghb.github.io/GPU-scroll-sequence/)
-[![Repository](https://img.shields.io/badge/Repository-GitHub-111111?style=for-the-badge&logo=github&logoColor=white)](https://github.com/VPGHb/GPU-scroll-sequence)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-c2cabb?style=for-the-badge&logo=githubpages&logoColor=111111)](https://vpghb.github.io/Web-GPU-scroll-sequence/)
+[![Repository](https://img.shields.io/badge/Repository-GitHub-111111?style=for-the-badge&logo=github&logoColor=white)](https://github.com/VPGHb/Web-GPU-scroll-sequence)
 [![Created by Vraj Patel](https://img.shields.io/badge/Created%20by-Vraj%20Patel-f7f8ff?style=for-the-badge)](https://github.com/VPGHb)
 
 A standalone product-style scroll experience created by Vraj Patel. The motion frames were generated with Google Flow, sliced into an image sequence, and rebuilt as a web experience with HTML, CSS, GSAP, ScrollTrigger, and canvas rendering.
@@ -18,7 +18,7 @@ Credit and inspiration: [Cindy Zhu's 5K scroll animation guide](https://cindyzhu
 
 After publishing with GitHub Pages, the site will be available here:
 
-[https://vpghb.github.io/GPU-scroll-sequence/](https://vpghb.github.io/GPU-scroll-sequence/)
+[https://vpghb.github.io/Web-GPU-scroll-sequence/](https://vpghb.github.io/Web-GPU-scroll-sequence/)
 
 ## Overview
 
@@ -134,17 +134,17 @@ The product slowly comes apart into an exploded view: the casing separates and t
 ## Publish With GitHub Pages
 
 1. Open this folder in GitHub Desktop.
-2. Click `Publish repository` and publish it as `GPU-scroll-sequence`.
+2. Click `Publish repository` and publish it as `Web-GPU-scroll-sequence`.
 3. On GitHub, open the repository settings.
 4. Go to `Pages`.
 5. Set the source to `Deploy from a branch`.
-6. Choose branch `main` and folder `/root`.
+6. Choose branch `main` and folder `/docs`.
 7. Save and wait for GitHub Pages to deploy.
 
 The expected public URL is:
 
 ```text
-https://vpghb.github.io/GPU-scroll-sequence/
+https://vpghb.github.io/Web-GPU-scroll-sequence/
 ```
 
 ## Run Locally
