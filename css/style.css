@@ -581,3 +581,6 @@ body::after {
     opacity: .15;
   }
 }
+.outro-actions {
+  margin-top: 12px;
+}
