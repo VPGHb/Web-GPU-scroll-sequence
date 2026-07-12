@@ -111,7 +111,7 @@ function setActiveWalkthroughStep(step, index) {
 }
 
 function initWalkthrough() {
-  const section = document.getElementById("walkthrough-section");
+  const section = document.getElementById("process");
   const steps = gsap.utils.toArray(".walkthrough-step");
   if (!section || !steps.length) return;
   if (walkthroughFrame) walkthroughFrame.src = imageAt(8);
