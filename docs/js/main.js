@@ -101,27 +101,109 @@ function preloadFrames() {
 }
 
 function setActiveWalkthroughStep(step, index) {
-  document.querySelectorAll(".walkthrough-step").forEach((item) => item.classList.toggle("is-active", item === step));
+  const steps = gsap.utils.toArray(".walkthrough-step");
+
+  steps.forEach((item) => {
+    const active = item === step;
+    item.classList.toggle("is-active", active);
+    gsap.to(item, {
+      autoAlpha: active ? 1 : 0.48,
+      x: active ? 0 : -18,
+      scale: active ? 1 : 0.985,
+      duration: 0.34,
+      ease: "power2.out",
+      overwrite: true
+    });
+  });
+
   if (walkthroughStepLabel) walkthroughStepLabel.textContent = step.dataset.step || String(index + 1).padStart(2, "0");
   if (walkthroughTitle) walkthroughTitle.textContent = step.dataset.title || "";
-  if (walkthroughFrame) walkthroughFrame.src = imageAt(8 + index * 16);
 
-  gsap.to(".walkthrough-visual", { scale: 1 + index * 0.018, rotate: index === 1 ? -1.2 : index === 2 ? 1.2 : 0, duration: 0.45, ease: "power2.out" });
-  gsap.to(".walkthrough-orbit", { rotate: index * 96, duration: 0.65, ease: "power2.out" });
+  const nextFrame = imageAt(8 + index * 16);
+  if (walkthroughFrame && walkthroughFrame.src !== nextFrame) {
+    gsap.to(walkthroughFrame, {
+      autoAlpha: 0,
+      scale: 0.94,
+      duration: 0.16,
+      ease: "power2.out",
+      overwrite: true,
+      onComplete: () => {
+        walkthroughFrame.src = nextFrame;
+        gsap.to(walkthroughFrame, { autoAlpha: 1, scale: 1, duration: 0.34, ease: "back.out(1.35)", overwrite: true });
+      }
+    });
+  }
+
+  gsap.to(".walkthrough-visual", {
+    scale: 1 + index * 0.018,
+    rotate: index === 1 ? -1.2 : index === 2 ? 1.2 : 0,
+    boxShadow: index === 0 ? "0 36px 110px rgba(0,0,0,.62)" : "0 42px 128px rgba(0,0,0,.72)",
+    duration: 0.45,
+    ease: "power2.out",
+    overwrite: true
+  });
+
+  gsap.to(".walkthrough-orbit", {
+    rotate: index * 118,
+    duration: 0.75,
+    ease: "power2.out",
+    overwrite: true
+  });
 }
 
 function initWalkthrough() {
-  const section = document.getElementById("process");
+  const section = document.querySelector(".walkthrough-section");
   const steps = gsap.utils.toArray(".walkthrough-step");
   if (!section || !steps.length) return;
-  if (walkthroughFrame) walkthroughFrame.src = imageAt(8);
+
+  if (walkthroughFrame) {
+    walkthroughFrame.src = imageAt(8);
+    gsap.set(walkthroughFrame, { autoAlpha: 1, scale: 1 });
+  }
+
+  gsap.set(steps, { autoAlpha: 0.48, x: -18, scale: 0.985 });
+  setActiveWalkthroughStep(steps[0], 0);
 
   steps.forEach((step, index) => {
-    ScrollTrigger.create({ trigger: step, start: "top 58%", end: "bottom 42%", onEnter: () => setActiveWalkthroughStep(step, index), onEnterBack: () => setActiveWalkthroughStep(step, index) });
-    gsap.fromTo(step, { opacity: index === 0 ? 1 : 0.34, y: 22 }, { opacity: 1, y: 0, ease: "none", scrollTrigger: { trigger: step, start: "top 78%", end: "top 46%", scrub: 0.55 } });
+    ScrollTrigger.create({
+      trigger: step,
+      start: "top 62%",
+      end: "bottom 38%",
+      onEnter: () => setActiveWalkthroughStep(step, index),
+      onEnterBack: () => setActiveWalkthroughStep(step, index)
+    });
+
+    gsap.fromTo(step,
+      { y: 42, filter: "blur(8px)" },
+      {
+        y: 0,
+        filter: "blur(0px)",
+        ease: "none",
+        scrollTrigger: {
+          trigger: step,
+          start: "top 86%",
+          end: "top 54%",
+          scrub: 0.5
+        }
+      }
+    );
   });
 
-  gsap.fromTo(".walkthrough-visual", { y: 24, opacity: 0.72 }, { y: 0, opacity: 1, ease: "none", scrollTrigger: { trigger: section, start: "top 78%", end: "top 24%", scrub: 0.7 } });
+  gsap.fromTo(".walkthrough-visual",
+    { y: 40, autoAlpha: 0, scale: 0.94 },
+    {
+      y: 0,
+      autoAlpha: 1,
+      scale: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 82%",
+        end: "top 34%",
+        scrub: 0.7
+      }
+    }
+  );
 }
 
 function initProductCards() {

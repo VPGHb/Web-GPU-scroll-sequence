@@ -346,3 +346,103 @@ canvas { width: 100vw; height: 100vh; display: block; background: #000; }
     width: min(100% - 32px, 1060px);
   }
 }
+/* Process walkthrough animation emphasis */
+.walkthrough-section {
+  overflow: clip;
+}
+
+.walkthrough-step {
+  position: relative;
+  border-left-width: 2px;
+  will-change: transform, opacity, filter;
+}
+
+.walkthrough-step::before {
+  content: attr(data-step);
+  position: absolute;
+  left: -17px;
+  top: clamp(22px, 3vw, 34px);
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.16);
+  background: #050507;
+  color: rgba(247,248,255,.58);
+  font-size: .68rem;
+  font-weight: 850;
+  letter-spacing: .08em;
+  transition: border-color .35s ease, color .35s ease, background .35s ease, box-shadow .35s ease;
+}
+
+.walkthrough-step.is-active::before {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #050507;
+  box-shadow: 0 0 28px rgba(194,202,187,.34);
+}
+
+.walkthrough-step.is-active h3 {
+  text-shadow: 0 0 26px rgba(247,248,255,.14);
+}
+
+.walkthrough-step.is-active p:not(.eyebrow) {
+  color: rgba(247,248,255,.78);
+}
+
+.walkthrough-visual {
+  opacity: 0;
+  transform-origin: center;
+  animation: visualFloat 6s ease-in-out infinite;
+}
+
+.walkthrough-frame {
+  opacity: 0;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.walkthrough-orbit {
+  animation: orbitDrift 18s linear infinite;
+}
+
+.walkthrough-visual::before {
+  animation: ringPulse 4.5s ease-in-out infinite;
+}
+
+@keyframes visualFloat {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -10px; }
+}
+
+@keyframes orbitDrift {
+  to { rotate: 360deg; }
+}
+
+@keyframes ringPulse {
+  0%, 100% { opacity: .44; scale: 1; }
+  50% { opacity: .78; scale: 1.035; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .walkthrough-visual,
+  .walkthrough-orbit,
+  .walkthrough-visual::before {
+    animation: none;
+  }
+
+  .walkthrough-frame,
+  .walkthrough-visual,
+  .walkthrough-step {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .walkthrough-step::before {
+    left: 18px;
+    top: -16px;
+  }
+}
