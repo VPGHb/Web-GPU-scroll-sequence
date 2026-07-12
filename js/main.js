@@ -156,54 +156,88 @@ function initWalkthrough() {
   const steps = gsap.utils.toArray(".walkthrough-step");
   if (!section || !steps.length) return;
 
+  let activeIndex = -1;
+
   if (walkthroughFrame) {
     walkthroughFrame.src = imageAt(8);
     gsap.set(walkthroughFrame, { autoAlpha: 1, scale: 1 });
   }
 
-  gsap.set(steps, { autoAlpha: 0.48, x: -18, scale: 0.985 });
-  setActiveWalkthroughStep(steps[0], 0);
+  gsap.set(".walkthrough-visual", { autoAlpha: 1, y: 0, scale: 1 });
+  gsap.set(steps, { autoAlpha: 0.58, x: -16, scale: 0.99, filter: "blur(0px)" });
+
+  const activateByIndex = (index) => {
+    const safeIndex = clamp(index, 0, steps.length - 1);
+    if (safeIndex === activeIndex) return;
+    activeIndex = safeIndex;
+    setActiveWalkthroughStep(steps[safeIndex], safeIndex);
+  };
+
+  activateByIndex(0);
+
+  const updateFromViewport = () => {
+    const targetY = window.innerHeight * 0.52;
+    let closestIndex = 0;
+    let closestDistance = Number.POSITIVE_INFINITY;
+
+    steps.forEach((step, index) => {
+      const rect = step.getBoundingClientRect();
+      const center = rect.top + rect.height / 2;
+      const distance = Math.abs(center - targetY);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    activateByIndex(closestIndex);
+  };
 
   steps.forEach((step, index) => {
     ScrollTrigger.create({
       trigger: step,
-      start: "top 62%",
-      end: "bottom 38%",
-      onEnter: () => setActiveWalkthroughStep(step, index),
-      onEnterBack: () => setActiveWalkthroughStep(step, index)
+      start: "top 68%",
+      end: "bottom 32%",
+      onEnter: () => activateByIndex(index),
+      onEnterBack: () => activateByIndex(index),
+      onUpdate: updateFromViewport
     });
 
     gsap.fromTo(step,
-      { y: 42, filter: "blur(8px)" },
+      { y: 38, autoAlpha: 0.42 },
       {
         y: 0,
-        filter: "blur(0px)",
+        autoAlpha: 1,
         ease: "none",
         scrollTrigger: {
           trigger: step,
-          start: "top 86%",
-          end: "top 54%",
-          scrub: 0.5
+          start: "top 88%",
+          end: "top 52%",
+          scrub: 0.45
         }
       }
     );
   });
 
   gsap.fromTo(".walkthrough-visual",
-    { y: 40, autoAlpha: 0, scale: 0.94 },
+    { y: 34, scale: 0.96 },
     {
       y: 0,
-      autoAlpha: 1,
       scale: 1,
       ease: "none",
       scrollTrigger: {
         trigger: section,
-        start: "top 82%",
+        start: "top 88%",
         end: "top 34%",
-        scrub: 0.7
+        scrub: 0.65,
+        onUpdate: updateFromViewport
       }
     }
   );
+
+  window.addEventListener("scroll", updateFromViewport, { passive: true });
+  window.addEventListener("resize", updateFromViewport);
+  updateFromViewport();
 }
 
 function initProductCards() {

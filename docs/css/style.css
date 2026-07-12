@@ -391,13 +391,13 @@ canvas { width: 100vw; height: 100vh; display: block; background: #000; }
 }
 
 .walkthrough-visual {
-  opacity: 0;
+  opacity: 1;
   transform-origin: center;
   animation: visualFloat 6s ease-in-out infinite;
 }
 
 .walkthrough-frame {
-  opacity: 0;
+  opacity: 1;
   transform-origin: center;
   will-change: transform, opacity;
 }
