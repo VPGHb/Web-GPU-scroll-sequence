@@ -446,3 +446,46 @@ canvas { width: 100vw; height: 100vh; display: block; background: #000; }
     top: -16px;
   }
 }
+/* Parallax title typography tune */
+.parallax-copy {
+  gap: clamp(14px, 2.4vw, 22px);
+}
+
+.parallax-copy h2 {
+  max-width: min(620px, 50vw);
+  font-size: clamp(2.45rem, 5.15vw, 5.7rem);
+  line-height: .96;
+  text-wrap: balance;
+}
+
+.parallax-copy .eyebrow {
+  margin-bottom: 2px;
+}
+
+.parallax-copy p {
+  max-width: min(520px, 46vw);
+}
+
+@media (max-width: 900px) {
+  .parallax-copy h2 {
+    max-width: min(640px, 78vw);
+    font-size: clamp(2.3rem, 7vw, 4.6rem);
+  }
+}
+
+@media (max-width: 720px) {
+  .parallax-copy {
+    gap: 16px;
+    padding-top: 16vh;
+  }
+
+  .parallax-copy h2 {
+    max-width: 100%;
+    font-size: clamp(2.1rem, 12vw, 3.8rem);
+    line-height: 1;
+  }
+
+  .parallax-copy p {
+    max-width: 100%;
+  }
+}
